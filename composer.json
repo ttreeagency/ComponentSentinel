@@ -1,6 +1,6 @@
 {
     "name": "ttree/componentsentinel",
-    "description": "",
+    "description": "Helper package to support our internal agency component based architecture",
     "type": "neos-package",
     "license": "MIT",
     "require": {
