@@ -26,7 +26,7 @@ class Package extends BasePackage
                      * @var string $packageKey
                      * @var \Neos\Flow\Package\Package $package
                      */
-                    foreach ($packageManager->getActivePackages() as $packageKey => $package) {
+                    foreach ($packageManager->getAvailablePackages() as $packageKey => $package) {
                         if ($packageManager->isPackageFrozen($packageKey)) {
                             continue;
                         }
