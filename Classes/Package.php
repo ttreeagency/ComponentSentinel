@@ -6,8 +6,9 @@ use Neos\Flow\Core\Booting\Sequence;
 use Neos\Flow\Core\Booting\Step;
 use Neos\Flow\Core\Bootstrap;
 use Neos\Flow\Monitor\FileMonitor;
+use Neos\Flow\Package\FlowPackageInterface;
 use Neos\Flow\Package\Package as BasePackage;
-use Neos\Flow\Package\PackageManagerInterface;
+use Neos\Flow\Package\PackageManager;
 use Neos\Fusion\Core\Cache\FileMonitorListener;
 
 class Package extends BasePackage
@@ -21,12 +22,13 @@ class Package extends BasePackage
             $dispatcher->connect(Sequence::class, 'afterInvokeStep', function (Step $step) use ($bootstrap, $dispatcher) {
                 if ($step->getIdentifier() === 'neos.flow:systemfilemonitor') {
                     $fileMonitor = FileMonitor::createFileMonitorAtBoot('Fusion_Files', $bootstrap);
-                    $packageManager = $bootstrap->getEarlyInstance(PackageManagerInterface::class);
+                    /** @var PackageManager $packageManager */
+                    $packageManager = $bootstrap->getEarlyInstance(PackageManager::class);
                     /**
                      * @var string $packageKey
-                     * @var \Neos\Flow\Package\Package $package
+                     * @var FlowPackageInterface $package
                      */
-                    foreach ($packageManager->getAvailablePackages() as $packageKey => $package) {
+                    foreach ($packageManager->getFlowPackages() as $packageKey => $package) {
                         if ($packageManager->isPackageFrozen($packageKey)) {
                             continue;
                         }
