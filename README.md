@@ -1,5 +1,9 @@
 # Helper package to support our internal agency component based architecture
 
+This package contains a File monitoring configuration to detect changes in `Resources/Private/Components`.
+We use this directory to store all our components (Fusion, CSS, JS, ...). This package is useful only 
+during development.
+
 Acknowledgments
 ---------------
 
